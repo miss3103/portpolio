@@ -24,26 +24,23 @@ public class BoardController {
 	@RequestMapping("/*_list")
 	public String list(Model model , HttpServletRequest request) {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		String uri = request.getRequestURI();
-		String context= request.getContextPath();
-		String reqPath = uri.substring(context.length());
 		int page;
-		System.out.println(reqPath);
-	
-		switch(reqPath) {
-		case "/notify_list":
-			page = Integer.parseInt(request.getParameter("page"));
-			model.addAttribute("list", dao.boardList(1,page));
-			model.addAttribute("count",dao.boardCount(1));
-			model.addAttribute("page",page);
-			return "boards/notifyBoard/list";
-		case "/review_list":
-			page = Integer.parseInt(request.getParameter("page"));
-			model.addAttribute("review", dao.boardList(2,page));
-			model.addAttribute("count",dao.boardCount(2));
-			return "boards/reviewBoard/list";
-		}
-		return "home";
+		int btype;
+
+		page = Integer.parseInt(request.getParameter("page"));
+		btype = Integer.parseInt(request.getParameter("btype"));
+		model.addAttribute("list", dao.boardList(btype,page));
+		model.addAttribute("count",dao.boardCount(btype));
+		model.addAttribute("page",page);
+		model.addAttribute("typeName",dao.boardType(btype));
+		model.addAttribute("btype",btype);
+			
+//		case "/review_list":
+//			page = Integer.parseInt(request.getParameter("page"));
+//			model.addAttribute("review", dao.boardList(2,page));
+//			model.addAttribute("count",dao.boardCount(2));
+//			return "boards/reviewBoard/list";
+		return "boards/list";
 	}
 	
 	@RequestMapping("/*_content")
@@ -57,12 +54,11 @@ public class BoardController {
 		
 		switch(reqPath) {
 		case "/notify_content":
-			model.addAttribute("content", dao.boardContent(Integer.parseInt(request.getParameter("bIndent"))));
-			return "boards/notifyBoard/content";
+			model.addAttribute("content", dao.boardContent(Integer.parseInt(request.getParameter("bId"))));
 		case "/review_content":
 			break;
 		}
-		return "home";
+		return "boards/content";
 	}
 
 	

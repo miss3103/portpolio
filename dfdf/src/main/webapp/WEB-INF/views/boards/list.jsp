@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">공지사항</h1>
+					<h1 class="page-header">${typeName}</h1>
 				</div><!-- /.col-lg-12 -->
 			</div><!-- /.row -->
 			<div class="row">
@@ -33,17 +33,17 @@
 						<nav class="text-center">
 						<ul class="pagination">
 							<li>
-								<a href="notify_list?page=${page>1?(page-1):1}" aria-label="Previous">
+								<a href="notify_list?page=${page>1?(page-1):1}&btype=${btype}" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 						    </li>
 						    	<li>
 								    <c:forEach var="i" begin="1" end="${count/20+(count%20>0?1:0)}" step="1">
-								    <a href="notify_list?page=${i}">${i}</a>
+								    <a href="notify_list?page=${i}&btype=${btype}">${i}</a>
 								    </c:forEach>
 						    	</li>
 						    <li>
-								<a href="notify_list?page=${page<count/20+(count%20>0?1:0)?page+1:page}" aria-label="Next">
+								<a href="notify_list?page=${page<count/20+(count%20>0?1:0)?page+1:page}&btype=${btype}" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>

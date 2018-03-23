@@ -56,9 +56,9 @@
 							<ul class="dropdown-menu" role="menu">
 								<li>
 							
-								<a href="notify_list?page=1">공지사항</a></li>
+								<a href="notify_list?page=1&btype=1">공지사항</a></li>
 								<li class="divider"></li>
-								<li><a href="review_list">숙박후기</a></li>
+								<li><a href="review_list?page=1&btype=2">숙박후기</a></li>
 							</ul>
 						</li>
 					</ul>

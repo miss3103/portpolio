@@ -4,7 +4,11 @@
 
 
 	<select id="boardList" resultType="edu.kb.ex.dto.BoardDto">
-		select bId,bName,bTitle,bDate  from PENSION_BOARD WHERE bType=#{param1} order by bId desc
+		select bId,bName,bTitle,bDate  from PENSION_BOARD  WHERE bType=#{param1} order by bId desc 
+	</select>
+	
+	<select id="boardType" resultType="String">
+		select typeName from BOARD_TYPE WHERE bType = #{param1}
 	</select>
 	
 	<select id="boardContent" resultType="edu.kb.ex.dto.BoardDto">
