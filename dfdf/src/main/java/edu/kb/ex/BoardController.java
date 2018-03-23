@@ -21,7 +21,7 @@ public class BoardController {
 	private SqlSession sqlSession;
 
 	
-	@RequestMapping("/*_list")
+	@RequestMapping("/list")
 	public String list(Model model , HttpServletRequest request) {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
 		int page;
@@ -43,21 +43,17 @@ public class BoardController {
 		return "boards/list";
 	}
 	
-	@RequestMapping("/*_content")
+	@RequestMapping("/content")
 	public String contentView(HttpServletRequest request, Model model) {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		String uri = request.getRequestURI();
-		String context= request.getContextPath();
-		String reqPath = uri.substring(context.length());
+		int page;
+		int btype;
 
-		System.out.println(reqPath);
-		
-		switch(reqPath) {
-		case "/notify_content":
-			model.addAttribute("content", dao.boardContent(Integer.parseInt(request.getParameter("bId"))));
-		case "/review_content":
-			break;
-		}
+		page = Integer.parseInt(request.getParameter("page"));
+		btype = Integer.parseInt(request.getParameter("btype"));
+		model.addAttribute("content", dao.boardContent(Integer.parseInt(request.getParameter("bId"))));
+		model.addAttribute("page",page);
+		model.addAttribute("btype",btype);
 		return "boards/content";
 	}
 

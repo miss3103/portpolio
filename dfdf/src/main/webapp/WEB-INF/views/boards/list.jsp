@@ -23,27 +23,32 @@
 							<tr>
 								<td>${dto.bId}</td>
 
-								<td><a href="notify_content?bId=${dto.bId}">${dto.bTitle}</a></td>
+								<td><a href="content?bId=${dto.bId}&page=${page}&btype=${btype}">${dto.bTitle}</a></td>
 								<td>${dto.bName}</td>
 								<td>${dto.bDate}</td>
 							</tr>
 							</c:forEach>
 						</table>
 						</form>
+							<div class="text-right">
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-edit" aria-hidden="true"></i>&nbsp;작성하기
+								</button>
+						</div>
 						<nav class="text-center">
 						<ul class="pagination">
 							<li>
-								<a href="notify_list?page=${page>1?(page-1):1}&btype=${btype}" aria-label="Previous">
+								<a href="list?page=${page>1?(page-1):1}&btype=${btype}" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 						    </li>
 						    	<li>
 								    <c:forEach var="i" begin="1" end="${count/20+(count%20>0?1:0)}" step="1">
-								    <a href="notify_list?page=${i}&btype=${btype}">${i}</a>
+								    <a href="list?page=${i}&btype=${btype}">${i}</a>
 								    </c:forEach>
 						    	</li>
 						    <li>
-								<a href="notify_list?page=${page<count/20+(count%20>0?1:0)?page+1:page}&btype=${btype}" aria-label="Next">
+								<a href="list?page=${page<count/20+(count%20>0?1:0)?page+1:page}&btype=${btype}" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 								</a>
 							</li>
